@@ -1,3 +1,3 @@
-# <img src="logo.svg" height="20"> BlueSky Likes Components
+# <img src="logo.svg" height="30"> BlueSky Likes Components
 
 Description
