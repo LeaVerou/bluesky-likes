@@ -54,27 +54,22 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 
 	async render () {
-		this.#dom.link.href = this.src;
+		let postUrl = this.src;
+		this.#dom.link.href = postUrl;
 
-		let { username, did, postId } = parsePostUrl(this.src);
+		let post = await getPost(postUrl);
 
-		if (!username || !postId) {
-			// Lazy?
+		if (!post) {
+			// Lazy loading?
 			return;
 		}
 
-		if (!did) {
-			did = BlueskyLikes.dids[username] ?? (await getProfile(username))?.did;
-			BlueskyLikes.dids[username] = did;
-		}
-
-		this.#data.post = (await getPost(did, postId))?.posts[0];
-		this.#data.likes = this.#data.post?.likeCount;
+		this.#data.post = post;
+		let likes = (this.#data.likes = post.likeCount);
+		let hasLikes = likes > 0;
 
 		// Output likes to the DOM as soon as we can
-		this.#dom.likeCount.textContent = this.#data.likes;
-
-		let hasLikes = this.#data.likes > 0;
+		this.#dom.likeCount.textContent = likes;
 
 		if (hasLikes) {
 			this._internals.states?.delete("empty");
@@ -85,7 +80,7 @@ export default class BlueskyLikes extends HTMLElement {
 			return;
 		}
 
-		this.#data.likers = (await getPostLikes(did, postId))?.likes || [];
+		this.#data.likers = await getPostLikes(postUrl);
 
 		// Render the likers
 		let likerHTML = [];
