@@ -137,12 +137,15 @@ While this library is absolutely not intended as a BlueSky API SDK, if you do ne
 
 The following functions are available:
 
-- `parsePostUrl(url)`: Parses a BlueSky post URL and returns the post's handle and URI. **Synchronous**.
 - `getProfile(handle)`: Fetches a user profile by handle.
-- `getDid(handle)`: Get the DID of a user by their handle.
-- `getPostUri(url)`: Fetches a post AT URI by its URL.
 - `getPost(url)`: Fetches a post details by URL.
 - `getPostLikes(url)`: Fetches the likers for a post by its URL.
+
+Also these, though you probably won’t need them unless you’re making new API calls not covered by these endpoints:
+
+- `parsePostUrl(url)`: Parses a BlueSky post URL and returns the post's handle and URI. **Synchronous**.
+- `getDid(handle)`: Get the DID of a user by their handle.
+- `getPostUri(url)`: Fetches a post AT URI by its URL.
 
 Unless otherwise mentioned, all functions are async.
 
