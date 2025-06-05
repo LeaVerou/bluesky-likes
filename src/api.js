@@ -139,7 +139,8 @@ export async function getPostLikes (postUrl, options = {}) {
 	let apiCall = `${BASE_ENDPOINT}${endpoint}?uri=${postUri}`;
 
 	if (options.limit) {
-		apiCall += `&limit=${options.limit}`;
+		let limit = Math.min(options.limit, 100);
+		apiCall += `&limit=${limit}`;
 	}
 
 	let data = getJSON(apiCall).then(data => data?.likes);
