@@ -129,4 +129,6 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 }
 
-customElements.define("bluesky-likes", BlueskyLikes);
+if (!customElements.get("bluesky-likes")) {
+	customElements.define("bluesky-likes", BlueskyLikes);
+}
