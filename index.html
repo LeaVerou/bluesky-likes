@@ -33,6 +33,11 @@
 				padding: 2rem;
 			}
 
+			h1,
+			h2 {
+				line-height: 1.15;
+			}
+
 			h1 {
 				font-size: 300%;
 				color: var(--color-accent);
@@ -45,7 +50,6 @@
 
 			h2 {
 				font-size: 200%;
-				line-height: 1.15;
 			}
 
 			input,
@@ -53,14 +57,28 @@
 				font: inherit;
 			}
 
+			form {
+				align-items: end;
+			}
+
 			form,
 			label {
 				display: flex;
 				gap: 0.5rem;
 
-				label,
-				input {
+				label:has(#url),
+				#url {
 					flex: 1;
+				}
+
+				label {
+					gap: 0;
+					flex-flow: column;
+					font-size: 80%;
+
+					input {
+						font-size: 125%;
+					}
 				}
 			}
 
@@ -79,14 +97,21 @@
 			Bluesky Likes Components
 		</h1>
 
-		<form onsubmit="event.preventDefault(); likes.src = likers.src = url.value">
+		<form
+			onsubmit="event.preventDefault(); likes.src = likers.src = url.value; likers.max = max.value"
+		>
 			<label>
 				Post URL:
 				<input
 					type="url"
 					id="url"
-					placeholder="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
+					value="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
+					placeholder="https://bsky.app/profile/[handle]/post/[post-id]"
 				/>
+			</label>
+			<label>
+				Max:
+				<input type="number" id="max" placeholder="50" min="1" max="100" />
 			</label>
 			<button type="submit">Load</button>
 		</form>

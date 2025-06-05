@@ -13,9 +13,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 		return this.data.likers ?? [];
 	}
 
-	get hiddenCount () {
-		return this.likes - this.likers.length;
-	}
+	hiddenCount = 0;
 
 	async fetch ({ force } = {}) {
 		await super.fetch({ force });
@@ -45,6 +43,14 @@ export default class BlueskyLikers extends BlueskyLikes {
 
 			// Render the likers
 			let likers = this.data.likers ?? [];
+			let max = this.max;
+
+			if (likers.length > max) {
+				likers = likers.slice(0, max);
+			}
+
+			this.hiddenCount = likes - likers.length;
+
 			let html = likers.map(liker => templates.user(liker));
 
 			if (this.hiddenCount > 0) {
@@ -69,7 +75,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 	}
 
 	get max () {
-		return Number(this.getAttribute("max") || 100);
+		return Number(this.getAttribute("max") || 50);
 	}
 
 	set max (value) {
@@ -84,7 +90,8 @@ export default class BlueskyLikers extends BlueskyLikes {
 		super.attributeChangedCallback(name, oldValue, newValue);
 
 		if (name === "max") {
-			this.render({ useCache: true });
+			let oldMax = oldValue === null ? 50 : Number(oldValue);
+			this.render({ useCache: oldMax <= newValue });
 		}
 	}
 }
