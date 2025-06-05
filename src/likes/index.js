@@ -66,7 +66,9 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 
 	connectedCallback () {
-		this.render({ useCache: true });
+		if (this.src) {
+			this.render({ useCache: true });
+		}
 	}
 
 	get post () {
