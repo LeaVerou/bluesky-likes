@@ -3,13 +3,13 @@
 	"version": "0.0.1",
 	"description": "Description",
 	"keywords": [],
-	"homepage": "https://github.com/leaverou/pkg-name/#readme",
+	"homepage": "https://github.com/leaverou/bluesky-likes/#readme",
 	"bugs": {
-		"url": "https://github.com/leaverou/pkg-name/issues"
+		"url": "https://github.com/leaverou/bluesky-likes/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/leaverou/pkg-name.git"
+		"url": "git+https://github.com/leaverou/bluesky-likes.git"
 	},
 	"license": "MIT",
 	"author": "Lea Verou",
