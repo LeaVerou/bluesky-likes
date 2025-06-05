@@ -95,6 +95,7 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 
 	async render ({ useCache = false } = {}) {
+		this._internals.states?.add("loading");
 		this.#dom.link.href = this.likersUrl;
 
 		if (!this.data.post || !useCache) {
@@ -104,6 +105,7 @@ export default class BlueskyLikes extends HTMLElement {
 		if (this.data.post && this.#dom.count) {
 			this.#dom.count.textContent = this.likes;
 		}
+		this._internals.states?.delete("loading");
 	}
 
 	get src () {

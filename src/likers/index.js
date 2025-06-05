@@ -26,6 +26,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 	}
 
 	async render ({ useCache = false } = {}) {
+		this._internals.states?.add("loading");
 		if (!this.data.likers || !useCache) {
 			await this.fetch({ force: !useCache });
 		}
@@ -41,28 +42,30 @@ export default class BlueskyLikers extends BlueskyLikes {
 
 		if (hasLikes) {
 			this._internals.states?.delete("empty");
+
+			// Render the likers
+			let likers = this.data.likers ?? [];
+			let html = likers.map(liker => templates.user(liker));
+
+			if (this.hiddenCount > 0) {
+				html.push(
+					templates.more({
+						hiddenCount: this.hiddenCount,
+						post: this.data.post,
+						url: this.src,
+					}),
+				);
+			}
+
+			this._setShadowHTML(html.join(" "));
 		}
 		else {
 			this._internals.states?.add("empty");
+
 			this._setShadowHTML(`<slot name='empty'>${templates.empty({ url: this.src })}</slot>`);
-			return;
 		}
 
-		// Render the likers
-		let likers = this.data.likers ?? [];
-		let html = likers.map(liker => templates.user(liker));
-
-		if (this.hiddenCount > 0) {
-			html.push(
-				templates.more({
-					hiddenCount: this.hiddenCount,
-					post: this.data.post,
-					url: this.src,
-				}),
-			);
-		}
-
-		this._setShadowHTML(html.join(" "));
+		this._internals.states?.delete("loading");
 	}
 
 	get max () {
