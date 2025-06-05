@@ -69,6 +69,7 @@ img {
 	color: var(--more-color-text);
 	font-weight: 600;
 	letter-spacing: -.03em;
+	text-indent: -.2em; /* visual centering to account for + */
 }
 `;
 
