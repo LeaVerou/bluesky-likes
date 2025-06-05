@@ -1,5 +1,4 @@
-const HOST = "https://public.api.bsky.app";
-const BASE_ENDPOINT = HOST + "/xrpc/app.bsky.";
+const BASE_ENDPOINT = "https://public.api.bsky.app/xrpc/app.bsky.";
 
 let endpoints = {
 	profile: "actor.getProfile",
@@ -36,22 +35,23 @@ export async function getProfile (handle) {
 	}
 
 	let profileUrl = `${BASE_ENDPOINT}${endpoint}?actor=${handle}`;
-	let profile = await (await fetch(profileUrl)).json();
-	return (cache[handle] = profile);
+	let data = getJSON(profileUrl);
+	cache[handle] = data;
+	data = await data;
+
+	return (cache[handle] = data);
 }
 
 export async function getDid (handle) {
+	if (handle.startsWith("did:")) {
+		return handle;
+	}
+
 	return (await getProfile(handle))?.did;
 }
 
-let postUriCache = {};
-
 // Bluesky “at-uri” of the post
 export async function getPostUri (postUrl) {
-	if (postUriCache[postUrl]) {
-		return postUriCache[postUrl];
-	}
-
 	let post = parsePostUrl(postUrl);
 
 	if (!post.handle || !post.postId) {
@@ -64,9 +64,7 @@ export async function getPostUri (postUrl) {
 		return undefined;
 	}
 
-	let postUri = `at://${did}/app.bsky.feed.post/${post.postId}`;
-	postUriCache[postUrl] = postUri;
-	return postUri;
+	return `at://${did}/app.bsky.feed.post/${post.postId}`;
 }
 
 export async function getPost (postUrl, options = {}) {
@@ -84,14 +82,15 @@ export async function getPost (postUrl, options = {}) {
 	}
 
 	const apiCall = `${BASE_ENDPOINT}${endpoint}?uris=${postUri}`;
-	let data = await (await fetch(apiCall)).json();
-	let post = data?.posts?.[0];
+	let data = getJSON(apiCall).then(data => data?.posts?.[0]);
+	cache[postUrl] = data;
+	data = await data;
 
-	if (!post) {
+	if (!data) {
 		return null;
 	}
 
-	return (cache[postUrl] = post);
+	return (cache[postUrl] = data);
 }
 
 export async function getPostLikes (postUrl, options = {}) {
@@ -114,12 +113,18 @@ export async function getPostLikes (postUrl, options = {}) {
 		apiCall += `&limit=${options.limit}`;
 	}
 
-	let data = await (await fetch(apiCall)).json();
-	let likes = data?.likes;
+	let data = getJSON(apiCall).then(data => data?.likes);
+	cache[postUrl] = data;
 
-	if (!likes) {
+	data = await data;
+
+	if (!data) {
 		return null;
 	}
 
-	return (cache[postUrl] = likes);
+	return (cache[postUrl] = data);
+}
+
+function getJSON (url) {
+	return fetch(url).then(res => res.json());
 }
