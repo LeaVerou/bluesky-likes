@@ -11,24 +11,70 @@
 					1rem/1.5 ui-sans-serif,
 					system-ui,
 					sans-serif;
+				--accent-color: #1185fe;
+				accent-color: var(--accent-color);
 			}
 
 			body {
 				margin: 0;
 				padding: 2rem;
 			}
+
+			h1 {
+				font-size: 300%;
+				color: var(--accent-color);
+
+				img {
+					height: 1.2em;
+					vertical-align: -0.3em;
+				}
+			}
+
+			input,
+			button {
+				font: inherit;
+			}
+
+			form,
+			label {
+				display: flex;
+				gap: 0.5rem;
+
+				label,
+				input {
+					flex: 1;
+				}
+			}
 		</style>
 		<script src="./src/index.js" type="module"></script>
 	</head>
 	<body>
+		<h1>
+			<img src="logo.svg" alt="" />
+			Bluesky Likes Components
+		</h1>
+
+		<form onsubmit="event.preventDefault(); likes.src = likers.src = url.value">
+			<label>
+				Post URL:
+				<input
+					type="url"
+					id="url"
+					placeholder="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
+				/>
+			</label>
+			<button type="submit">Load</button>
+		</form>
 		<h2>
 			<bluesky-likes
+				id="likes"
 				src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
 			></bluesky-likes>
 			likes on Bluesky
 		</h2>
 
 		<bluesky-likers
+			id="likers"
 			src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
 		></bluesky-likers>
 	</body>
