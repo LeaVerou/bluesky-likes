@@ -73,7 +73,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 		this.setAttribute("max", value);
 	}
 
-	get observedAttributes () {
+	static get observedAttributes () {
 		return [...super.observedAttributes, "max"];
 	}
 

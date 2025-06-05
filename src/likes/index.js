@@ -103,7 +103,7 @@ export default class BlueskyLikes extends HTMLElement {
 		this.setAttribute("src", value);
 	}
 
-	get observedAttributes () {
+	static get observedAttributes () {
 		return ["src"];
 	}
 
