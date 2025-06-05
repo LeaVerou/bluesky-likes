@@ -32,7 +32,7 @@ These components are designed to make common cases easy, and complex cases possi
 
 - **Dynamic**: Components respond to changes in the URL of the post — or when it’s lazily set later
 - **Ultra-lightweight**: The whole package is [~2 KB minified & gzipped](https://bundlephobia.com/package/bluesky-likes) and dependency-free
-- **Accessible**
+- **Accessible** & **i18n** ready
 - **Autoloading** is available to take the hassle out of figuring out when to load the components
 - **Highly customizable styling** via regular CSS properties, custom properties, states, and parts (but also beautiful by default so you don’t have to).
 - **Customizable content** via slots
