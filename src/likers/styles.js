@@ -1,0 +1,68 @@
+export default `
+:host {
+	--avatar-size: 3em;
+	--avatar-overlap-percentage: 0.3;
+	--avatar-overlap-percentage-y: 0.2;
+	--avatar-border: .15em solid canvas;
+	--avatar-shadow: 0 .1em .4em -.3em rgb(0 0 0 / 0.4);
+	--avatar-background: ${svg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="none">
+			<circle cx="12" cy="12" r="12" fill="#0070ff"></circle><circle cx="12" cy="9.5" r="3.5" fill="#fff"></circle>
+			<path stroke-linecap="round" stroke-linejoin="round" fill="#fff" d="M 12.058 22.784 C 9.422 22.784 7.007 21.836 5.137 20.262 C 5.667 17.988 8.534 16.25 11.99 16.25 C 15.494 16.25 18.391 18.036 18.864 20.357 C 17.01 21.874 14.64 22.784 12.058 22.784 Z"></path>
+		</svg>`)} center / cover canvas;
+	--more-background: #1185fe;
+	--more-color-text: white;
+
+	--avatar-overlap: calc(var(--avatar-size) * var(--avatar-overlap-percentage));
+	--avatar-overlap-y: calc(var(--avatar-size) * var(--avatar-overlap-percentage-y));
+
+	display: block;
+	padding-inline-start: var(--avatar-overlap);
+	padding-block-start: var(--avatar-overlap-y);
+	contain: inline-size;
+	container-name: likers;
+}
+
+a {
+	display: inline-flex;
+	margin-inline-start: calc(-1 * var(--avatar-overlap));
+	margin-block-start: calc(-1 * var(--avatar-overlap-y));
+	text-decoration: none;
+	color: inherit;
+	vertical-align: middle;
+	position: relative;
+
+	&:hover,
+	&:focus {
+		z-index: 1;
+	}
+}
+
+img {
+	display: block;
+
+}
+
+[part~="avatar"] {
+	inline-size: var(--avatar-size);
+	aspect-ratio: 1;
+	object-fit: cover;
+	border-radius: 50%;
+	box-shadow: var(--avatar-shadow);
+	border: var(--avatar-border);
+	background: var(--avatar-background);
+}
+
+[part~="more"] {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--more-background);
+	color: var(--more-color-text);
+	font-weight: 600;
+	letter-spacing: -.03em;
+}
+`;
+
+function svg (markup) {
+	return `url('data:image/svg+xml,${encodeURIComponent(markup)}')`;
+}

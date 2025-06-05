@@ -15,6 +15,11 @@
 	"author": "Lea Verou",
 	"type": "module",
 	"main": "src/index.js",
+	"exports": {
+		".": "./src/index.js",
+		"./likes": "./src/likes/index.js",
+		"./likers": "./src/likers/index.js"
+	},
 	"scripts": {
 		"release": "release-it",
 		"test": "echo \"Error: no test specified\" && exit 1"
