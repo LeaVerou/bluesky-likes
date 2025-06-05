@@ -6,13 +6,26 @@
 		<title>Bluesky Likes</title>
 		<link rel="icon" href="./logo.svg" />
 		<style>
+			:root {
+				--color-accent: #1185fe;
+				--color-neutral: oklch(50% 0.01 220);
+			}
+
 			html {
 				font:
 					1rem/1.5 ui-sans-serif,
 					system-ui,
 					sans-serif;
-				--accent-color: #1185fe;
-				accent-color: var(--accent-color);
+
+				accent-color: var(--color-accent);
+			}
+
+			a {
+				color: var(--color-accent);
+
+				&:not(:hover, :focus) {
+					text-decoration: none;
+				}
 			}
 
 			body {
@@ -22,7 +35,7 @@
 
 			h1 {
 				font-size: 300%;
-				color: var(--accent-color);
+				color: var(--color-accent);
 
 				img {
 					height: 1.2em;
@@ -49,6 +62,13 @@
 				input {
 					flex: 1;
 				}
+			}
+
+			footer {
+				margin-top: 2rem;
+				font-size: 70%;
+				color: var(--color-neutral);
+				font-weight: 500;
 			}
 		</style>
 		<script src="./src/index.js" type="module"></script>
@@ -82,5 +102,12 @@
 			id="likers"
 			src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
 		></bluesky-likers>
+
+		<footer>
+			By <a href="https://lea.verou.me">Lea Verou</a> and
+			<a href="https://d12n.me/">Dmitry Sharabin</a>
+			&bull; These components are not in any way affiliated with BlueSky. The BlueSky logo is
+			a trademark of Bluesky Social.
+		</footer>
 	</body>
 </html>
