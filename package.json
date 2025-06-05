@@ -28,7 +28,8 @@
 	"exports": {
 		".": "./src/index.js",
 		"./likes": "./src/likes/index.js",
-		"./likers": "./src/likers/index.js"
+		"./likers": "./src/likers/index.js",
+		"./autoload": "./src/autoload.js"
 	},
 	"scripts": {
 		"release": "release-it",
