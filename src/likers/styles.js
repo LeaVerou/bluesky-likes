@@ -32,11 +32,15 @@ export default `
 }
 
 a {
+	text-decoration: none;
+	color: inherit;
+}
+
+[part~="link"] {
 	display: inline-flex;
 	margin-inline-start: calc(-1 * var(--avatar-overlap));
 	margin-block-start: calc(-1 * var(--avatar-overlap-y));
-	text-decoration: none;
-	color: inherit;
+
 	vertical-align: middle;
 	position: relative;
 
@@ -48,7 +52,6 @@ a {
 
 img {
 	display: block;
-
 }
 
 [part~="avatar"] {

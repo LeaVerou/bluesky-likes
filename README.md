@@ -146,12 +146,13 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 
 ### Parts
 
-| Name         | Description                                                                                                                                                        |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `avatar`     | The circular element that displays a user, or the +N for users not shown. Corresponds to an `<img>` element for users with an avatar, and an `<a>` in other cases. |
-| `avatar-img` | The `<img>` element for users with an avatar.                                                                                                                      |
-| `user`       | The `<a>` element that links to the user's profile.                                                                                                                |
-| `more`       | The `<a>` element that displays the hidden count.                                                                                                                  |
+| Name           | Description                                                                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `avatar`       | The circular element that displays a user, or the +N for users not shown. Corresponds to an `<img>` element for users with an avatar, and an `<a>` in other cases. |
+| `avatar-img`   | The `<img>` element for users with an avatar.                                                                                                                      |
+| `link`         | The `<a>` element that wraps each entry (either links to the user's profile, or to all likers)                                                                     |
+| `profile-link` | The `<a>` element that links to the user's profile.                                                                                                                |
+| `more`         | The `<a>` element that displays the hidden count.                                                                                                                  |
 
 ## Autoloader
 

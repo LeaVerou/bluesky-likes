@@ -8,7 +8,7 @@ export default {
 			: `@${actor.handle}`;
 		let avatarSrc = actor.avatar?.replace("avatar", "avatar_thumbnail");
 		return `
-			<a href="https://bsky.app/profile/${actor.handle}" target="_blank" rel="nofollow" part="user link${avatarSrc ? "" : " avatar"}" title="${title}">
+			<a href="https://bsky.app/profile/${actor.handle}" target="_blank" rel="nofollow" part="profile-link link${avatarSrc ? "" : " avatar"}" title="${title}">
 				${avatarSrc ? `<img src="${avatarSrc}" alt="" part="avatar avatar-img" loading="lazy" />` : ""}
 			</a>`;
 	},
@@ -17,7 +17,7 @@ export default {
 			notation: "compact",
 		});
 		let likedBy = url + "/liked-by";
-		return `<a href="${likedBy}" target="_blank" part="avatar more">+${hiddenCountFormatted}</a>`;
+		return `<a href="${likedBy}" target="_blank" part="avatar link more">+${hiddenCountFormatted}</a>`;
 	},
 	empty ({ url }) {
 		return `No likes yet :( <a href="${url}" target="_blank">Be the first?</a>`;
