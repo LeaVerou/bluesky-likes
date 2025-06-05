@@ -8,7 +8,50 @@ Can be used separately, or together.
 
 For a demo, check out https://projects.verou.me/bluesky-likes/
 
+## Installation
+
+The easiest way is to use the [autoloader](#autoloader) and a CDN such as [unpkg](https://unpkg.com/).
+All it takes is pasting this into your HTML and you’re ready to use the components:
+
+```html
+<script src="https://unpkg.com/bluesky-likes/autoload" type="module"></script>
+```
+
+You can also install the components via npm and use with your toolchain of choice:
+
+```bash
+npm install bluesky-likes
+```
+
+Then import the components in your JavaScript.
+You can import everything:
+
+```js
+import { BlueskyLikes, BlueskyLikers, bsky } from "bluesky-likes";
+```
+
+Or you can use individual exports like `bluesky-likes/likes`.
+
+## Autoloader
+
+Due to its side effects, the autoloader is a separate export:
+
+```js
+import "bluesky-likes/autoload";
+```
+
+By default, the autoloader will not observe future changes: if the components are not available when the script runs, they will not be fetched.
+It will also not discover components that are in shadow roots of other components.
+This is done for performance reasons, since these features are slow and these components are mostly used on blogs and other content-focused websites that don’t need this.
+
+If, however, you do, you can use the `observe()` and `discover()` methods the autoloader exports:
+
+- `observe(root)` will observe `root` for changes and load components as they are added. You can use `unobserve()` to stop observing.
+- `discover(root)` will discover components in `root` and load them if they are not already loaded. `root` can be any DOM node, including documents and shadow roots.
+
 ## `<bluesky-likes>`
+
+Displays the number of likes on a post and links to the full list.
 
 ### Attributes
 
@@ -67,7 +110,7 @@ Pretty much all styling is on the host element, so you can just override regular
 
 | Name                            | Default Value                                                    | Description                                                                          |
 | ------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `--avatar-size`                 | `3em`                                                            | The size of each avatar.                                                             |
+| `--avatar-size`                 | `calc(2em + 1vw)`                                                | The size of each avatar.                                                             |
 | `--avatar-overlap-percentage`   | `0.3`                                                            | The percentage of horizontal overlap between avatars.                                |
 | `--avatar-overlap-percentage-y` | `0.2`                                                            | The percentage of vertical overlap between avatars.                                  |
 | `--avatar-border`               | `.15em solid canvas`                                             | The border style for each avatar.                                                    |
