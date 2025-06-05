@@ -8,7 +8,7 @@ export default {
 			: `@${actor.handle}`;
 		let avatarSrc = actor.avatar?.replace("avatar", "avatar_thumbnail");
 		return `
-			<a href="https://bsky.app/profile/${actor.handle}" target="_blank" part="user link${avatarSrc ? "" : " avatar"}" title="${title}">
+			<a href="https://bsky.app/profile/${actor.handle}" target="_blank" rel="nofollow" part="user link${avatarSrc ? "" : " avatar"}" title="${title}">
 				${avatarSrc ? `<img src="${avatarSrc}" alt="" part="avatar avatar-img" loading="lazy" />` : ""}
 			</a>`;
 	},
