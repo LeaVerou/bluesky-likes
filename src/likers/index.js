@@ -19,7 +19,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 		await super.fetch({ force });
 
 		if (this.data.post) {
-			this.data.likers = await getPostLikes(this.src, { force });
+			this.data.likers = await getPostLikes(this.src, { force, limit: this.max });
 		}
 
 		return this.data;
