@@ -1,14 +1,42 @@
 # <img src="logo.svg" height="28" style="height: 1em"> BlueSky Likes Components
 
 Components to display (and encourage) likes on [BlueSky](https://bsky.app) posts.
-Can be used separately, or together.
 
 - [`<bluesky-likes>`](#bluesky-likes): Displays the number of likes on a post.
 - [`<bluesky-likers>`](#bluesky-likers): Displays avatars of users who liked a post.
 
 For a demo, check out https://projects.verou.me/bluesky-likes/
 
+Can be used separately, or together.
+
+E.g. for something similar to [Salma Alam-Nayor’s](https://whitep4nth3r.com/blog/show-bluesky-likes-on-blog-posts/):
+
+```html
+<h2>
+	<bluesky-likes src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"></bluesky-likes>
+	likes on Bluesky
+</h2>
+
+<p>
+	<a href="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n">Like this post on Bluesky to see your face on this page</a>
+</p>
+
+<bluesky-likers src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"></bluesky-likers>
+```
+
 ![](demo/screenshot.png)
+
+## Features
+
+These components are designed to make common cases easy, and complex cases possible.
+
+- **Dynamic**: Components respond to changes in the URL of the post — or when it’s lazily set later
+- **Ultra-lightweight**: The whole package is [~2 KB minified & gzipped](https://bundlephobia.com/package/bluesky-likes) and dependency-free
+- **Accessible**
+- **Autoloading** is available to take the hassle out of figuring out when to load the components
+- **Highly customizable styling** via regular CSS properties, custom properties, states, and parts (but also beautiful by default so you don’t have to).
+- **Customizable content** via slots
+- **Hackable**: You can [replace the templates and styles](#replacing-templates-and-styles) of the components with your own, or even subclass them to create new components with different templates and styles
 
 ## Installation
 
@@ -37,6 +65,10 @@ Or you can use individual exports like `bluesky-likes/likes`.
 ## `<bluesky-likes>`
 
 Displays the number of likes on a post and links to the full list.
+
+```html
+<bluesky-likes src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"></bluesky-likes>
+```
 
 ### Attributes
 
@@ -70,6 +102,12 @@ Pretty much all styling is on the host element, so you can just override regular
 | `count` | The `<span>` that contains the like count. |
 
 ## `<bluesky-likers>`
+
+Displays the avatars of users who liked a post up to a max limit, and the number of additional users not shown.
+
+```html
+<bluesky-likers src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"></bluesky-likers>
+```
 
 ### Attributes
 
@@ -132,6 +170,18 @@ If, however, you do, you can use the `observe()` and `discover()` methods the au
 - `observe(root)` will observe `root` for changes and load components as they are added. You can use `unobserve()` to stop observing.
 - `discover(root)` will discover components in `root` and load them if they are not already loaded. `root` can be any DOM node, including documents and shadow roots.
 
+## Replacing templates and styles
+
+For most common cases, slots should be sufficient for customizing the content of the components and regular CSS to for styling them.
+However, for more advanced use cases, you can completely gut them and replace their templates and styles with your own.
+
+Every component class includes the templates used to render it as a static `templates` property and its CSS styles as a `styles` property.
+For example, `BlueskyLikes.templates` is the templates used by the `<bluesky-likes>` component, and `BlueskyLikers.styles` is the styles used by the `<bluesky-likers>` component.
+Each template is a function that takes a `data` object and returns a string of HTML, while the styles are a string of CSS.
+
+You can either tweak the templates directly, or you can create a subclass with different values and register it as a new component.
+If you make changes after elements have already been initialized, you should call `element.render({useCache: true})` on these elements.
+
 ## API wrapper
 
 Since these components had to interface with the BlueSky API, they also implement a tiny wrapper for the relevant parts of it.
@@ -150,6 +200,11 @@ Also these, though you probably won’t need them unless you’re making new API
 - `getPostUri(url)`: Fetches a post AT URI by its URL.
 
 Unless otherwise mentioned, all functions are async.
+
+## Credits
+
+- [Salma Alam-Nayor](https://whitep4nth3r.com/blog/show-bluesky-likes-on-blog-posts/) for the initial idea
+- [Dmitry Sharabin](https://d12n.me) for the [CodePen that sparked this](https://codepen.io/dmitrysharabin/pen/Jodbyqm)
 
 ## License
 
