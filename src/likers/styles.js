@@ -22,6 +22,15 @@ export default `
 	container-name: likers;
 }
 
+@keyframes loading {
+	from { opacity: 0.5; }
+	to { opacity: 0.8; }
+}
+
+:host(:state(loading)) a {
+	animation: loading 1s infinite alternate;
+}
+
 a {
 	display: inline-flex;
 	margin-inline-start: calc(-1 * var(--avatar-overlap));

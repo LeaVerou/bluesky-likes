@@ -9,6 +9,15 @@ export default `
 	text-decoration: none;
 }
 
+@keyframes loading {
+	from { opacity: 0.5; }
+	to { opacity: 0.8; }
+}
+
+:host(:state(loading)) #count {
+	animation: loading 1s infinite alternate;
+}
+
 a {
 	color: inherit;
 	text-decoration: none;
