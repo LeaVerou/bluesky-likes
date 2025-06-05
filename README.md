@@ -32,23 +32,6 @@ import { BlueskyLikes, BlueskyLikers, bsky } from "bluesky-likes";
 
 Or you can use individual exports like `bluesky-likes/likes`.
 
-## Autoloader
-
-Due to its side effects, the autoloader is a separate export:
-
-```js
-import "bluesky-likes/autoload";
-```
-
-By default, the autoloader will not observe future changes: if the components are not available when the script runs, they will not be fetched.
-It will also not discover components that are in shadow roots of other components.
-This is done for performance reasons, since these features are slow and these components are mostly used on blogs and other content-focused websites that don’t need this.
-
-If, however, you do, you can use the `observe()` and `discover()` methods the autoloader exports:
-
-- `observe(root)` will observe `root` for changes and load components as they are added. You can use `unobserve()` to stop observing.
-- `discover(root)` will discover components in `root` and load them if they are not already loaded. `root` can be any DOM node, including documents and shadow roots.
-
 ## `<bluesky-likes>`
 
 Displays the number of likes on a post and links to the full list.
@@ -129,3 +112,36 @@ Pretty much all styling is on the host element, so you can just override regular
 | `avatar-img` | The `<img>` element for users with an avatar.                                                                                                                      |
 | `user`       | The `<a>` element that links to the user's profile.                                                                                                                |
 | `more`       | The `<a>` element that displays the hidden count.                                                                                                                  |
+
+## Autoloader
+
+Due to its side effects, the autoloader is a separate export:
+
+```js
+import "bluesky-likes/autoload";
+```
+
+By default, the autoloader will not observe future changes: if the components are not available when the script runs, they will not be fetched.
+It will also not discover components that are in shadow roots of other components.
+This is done for performance reasons, since these features are slow and these components are mostly used on blogs and other content-focused websites that don’t need this.
+
+If, however, you do, you can use the `observe()` and `discover()` methods the autoloader exports:
+
+- `observe(root)` will observe `root` for changes and load components as they are added. You can use `unobserve()` to stop observing.
+- `discover(root)` will discover components in `root` and load them if they are not already loaded. `root` can be any DOM node, including documents and shadow roots.
+
+## API wrapper
+
+Since these components had to interface with the BlueSky API, they also implement a tiny wrapper for the relevant parts of it.
+While this library is absolutely not intended as a BlueSky API SDK, if you do need these functions, they are in [`src/api.js`](src/api.js) and have their own export too: `bluesky-likes/api`.
+
+The following functions are available:
+
+- `parsePostUrl(url)`: Parses a BlueSky post URL and returns the post's handle and URI. **Synchronous**.
+- `getProfile(handle)`: Fetches a user profile by handle.
+- `getDid(handle)`: Get the DID of a user by their handle.
+- `getPostUri(url)`: Fetches a post AT URI by its URL.
+- `getPost(url)`: Fetches a post details by URL.
+- `getPostLikes(url)`: Fetches the likers for a post by its URL.
+
+Unless otherwise mentioned, all functions are async.
