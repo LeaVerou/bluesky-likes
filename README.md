@@ -1,4 +1,4 @@
-# <img src="logo.svg" height="28"> BlueSky Likes Components
+# <img src="logo.svg" height="28" style="height: 1em"> BlueSky Likes Components
 
 Components to display (and encourage) likes on [BlueSky](https://bsky.app) posts.
 Can be used separately, or together.
@@ -7,6 +7,8 @@ Can be used separately, or together.
 - [`<bluesky-likers>`](#bluesky-likers): Displays avatars of users who liked a post.
 
 For a demo, check out https://projects.verou.me/bluesky-likes/
+
+![](demo/screenshot.png)
 
 ## Installation
 
