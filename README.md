@@ -149,4 +149,4 @@ Unless otherwise mentioned, all functions are async.
 ## License
 
 These components are [MIT licensed](LICENSE).
-However, if you are using this in a way that helps you profit, there is a **social** (not legal) expectation that you [give back by funding it](https://github.com/sponsors/LeaVerou).
+However, if you are using them in a way that helps you profit, there is a **social** (not legal) expectation that you [give back by funding their development](https://github.com/sponsors/LeaVerou).
