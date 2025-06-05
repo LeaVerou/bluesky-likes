@@ -21,6 +21,8 @@ export default class BlueskyLikers extends BlueskyLikes {
 		if (this.data.post) {
 			this.data.likers = await getPostLikes(this.src, { force });
 		}
+
+		return this.data;
 	}
 
 	async render ({ useCache = false } = {}) {

@@ -92,6 +92,8 @@ export default class BlueskyLikes extends HTMLElement {
 		}
 
 		this.data.post = post;
+
+		return this.data;
 	}
 
 	async render ({ useCache = false } = {}) {
