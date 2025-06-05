@@ -15,7 +15,7 @@ export default `
 	to { opacity: 0.8; }
 }
 
-:host(:state(loading)) #count {
+:host(:state(loading)) {
 	animation: loading 1s infinite alternate;
 }
 

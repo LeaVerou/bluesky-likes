@@ -9,9 +9,9 @@ const templates = {
 			? `<img src="${new URL("../../logo.svg", url)}" alt="🦋" part="icon" />`
 			: "🦋";
 		return `
-			<a part="link" target="_blank" id="link">
+			<a target="_blank" id="link" part="link">
 				<slot name="icon">${defaultIcon}</slot>
-				<span id="count" part="count">0</span>
+				<span part="count">0</span>
 				<slot></slot>
 			</a>`;
 	},
@@ -48,8 +48,8 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 
 	init () {
-		this.#dom.count = this.shadowRoot.querySelector("#count");
-		this.#dom.link = this.shadowRoot.querySelector("#link");
+		this.#dom.count = this.shadowRoot.querySelector("[part~=count]");
+		this.#dom.link = this.shadowRoot.querySelector("[part~=link]");
 	}
 
 	/**
