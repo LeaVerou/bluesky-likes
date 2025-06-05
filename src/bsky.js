@@ -6,7 +6,9 @@ let endpoints = {
 	likes: "feed.getLikes",
 };
 
-let cacheByEndpoint = Object.fromEntries(Object.values(endpoints).map(endpoint => [endpoint, {}]));
+export const cacheByEndpoint = Object.fromEntries(
+	Object.values(endpoints).map(endpoint => [endpoint, {}]),
+);
 /**
  * Parse a post like "https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
  * and return the handle and post ID
