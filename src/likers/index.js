@@ -26,7 +26,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 	}
 
 	async render ({ useCache = false } = {}) {
-		if (!this.data.likers || useCache) {
+		if (!this.data.likers || !useCache) {
 			await this.fetch({ force: !useCache });
 		}
 

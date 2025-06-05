@@ -88,7 +88,9 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 
 	async render ({ useCache = false } = {}) {
-		await this.fetch({ force: !useCache });
+		if (!this.data.post || !useCache) {
+			await this.fetch({ force: !useCache });
+		}
 
 		if (this.data.post && this.#dom.count) {
 			this.#dom.count.textContent = this.likes;
