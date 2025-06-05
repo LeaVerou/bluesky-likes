@@ -2,11 +2,11 @@ export default `
 :host {
 	display: inline-flex;
 	gap: 0.25em;
-	vertical-align: -.4em;
+	vertical-align: -.2em;
 	color: #1185fe;
-	border: .1em solid currentColor;
+	border: max(1px, .08em) solid currentColor;
 	border-radius: 0.25em;
-	padding: 0.1em 0.4em;
+	padding: 0.2em 0.35em;
 	text-decoration: none;
 }
 
