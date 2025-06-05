@@ -1,6 +1,6 @@
 export default `
 :host {
-	--avatar-size: 3em;
+	--avatar-size: calc(2em + 1vw);
 	--avatar-overlap-percentage: 0.3;
 	--avatar-overlap-percentage-y: 0.2;
 	--avatar-border: .15em solid canvas;
@@ -18,8 +18,8 @@ export default `
 	display: block;
 	padding-inline-start: var(--avatar-overlap);
 	padding-block-start: var(--avatar-overlap-y);
-	contain: inline-size;
-	container-name: likers;
+	/* Avoid more being on a new line by itself */
+	text-wrap: pretty;
 }
 
 @keyframes loading {
