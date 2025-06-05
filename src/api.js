@@ -6,9 +6,14 @@ let endpoints = {
 	likes: "feed.getLikes",
 };
 
+/**
+ * Cached API responses by endpoint
+ * @type {Record<string, Record<string, any>>}
+ */
 export const cacheByEndpoint = Object.fromEntries(
 	Object.values(endpoints).map(endpoint => [endpoint, {}]),
 );
+
 /**
  * Parse a post like "https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"
  * and return the handle and post ID
@@ -22,11 +27,18 @@ export function parsePostUrl (url) {
 	};
 }
 
-export async function getProfile (handle) {
+/**
+ * Get profile details by handle
+ * @param {string} handle
+ * @param {object} options
+ * @param {boolean} options.force - Bypass the cache and fetch the data again even if cached.
+ * @returns {Promise<object>}
+ */
+export async function getProfile (handle, options = {}) {
 	let endpoint = endpoints.profile;
 	let cache = cacheByEndpoint[endpoint];
 
-	if (cache[handle]) {
+	if (cache[handle] && !options.force) {
 		return cache[handle];
 	}
 
@@ -38,6 +50,12 @@ export async function getProfile (handle) {
 	return (cache[handle] = data);
 }
 
+/**
+ * Get the DID of a user by their handle.
+ * Does not send an API call if the handle is already a DID.
+ * @param {string} handle
+ * @returns {Promise<string>}
+ */
 export async function getDid (handle) {
 	if (handle.startsWith("did:")) {
 		return handle;
@@ -63,6 +81,13 @@ export async function getPostUri (postUrl) {
 	return `at://${did}/app.bsky.feed.post/${post.postId}`;
 }
 
+/**
+ * Get post details by URL.
+ * @param {string} postUrl
+ * @param {object} options
+ * @param {boolean} options.force - Bypass the cache and fetch the data again even if cached.
+ * @returns {Promise<object>}
+ */
 export async function getPost (postUrl, options = {}) {
 	let endpoint = endpoints.posts;
 	let cache = cacheByEndpoint[endpoint];
@@ -89,6 +114,14 @@ export async function getPost (postUrl, options = {}) {
 	return (cache[postUrl] = data);
 }
 
+/**
+ * Get the likers for a post by its URL.
+ * @param {string} postUrl
+ * @param {object} options
+ * @param {boolean} options.force - Bypass the cache and fetch the data again even if cached.
+ * @param {number} options.limit
+ * @returns {Promise<object>}
+ */
 export async function getPostLikes (postUrl, options = {}) {
 	let endpoint = endpoints.likes;
 	let cache = cacheByEndpoint[endpoint];
