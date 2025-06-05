@@ -13,6 +13,16 @@
 	},
 	"license": "MIT",
 	"author": "Lea Verou",
+	"contributors": [
+		"Lea Verou",
+		"Dmitry Sharabin"
+	],
+	"funding": [
+		{
+			"type": "individual",
+			"url": "https://github.com/sponsors/LeaVerou"
+		}
+	],
 	"type": "module",
 	"main": "src/index.js",
 	"exports": {
