@@ -9,9 +9,11 @@ const templates = {
 			? `<img src="${new URL("../../logo.svg", url)}" alt="🦋" part="icon" />`
 			: "🦋";
 		return `
-			<slot name="icon">${defaultIcon}</slot>
-			<span id="count" part="count">0</span>
-			<slot></slot>`;
+			<a part="link" target="_blank" id="link">
+				<slot name="icon">${defaultIcon}</slot>
+				<span id="count" part="count">0</span>
+				<slot></slot>
+			</a>`;
 	},
 };
 
@@ -47,6 +49,7 @@ export default class BlueskyLikes extends HTMLElement {
 
 	init () {
 		this.#dom.count = this.shadowRoot.querySelector("#count");
+		this.#dom.link = this.shadowRoot.querySelector("#link");
 	}
 
 	/**
@@ -74,6 +77,10 @@ export default class BlueskyLikes extends HTMLElement {
 		return this.data.post?.likeCount ?? 0;
 	}
 
+	get likersUrl () {
+		return this.src + "/liked-by";
+	}
+
 	async fetch ({ force } = {}) {
 		let postUrl = this.src;
 
@@ -88,6 +95,8 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 
 	async render ({ useCache = false } = {}) {
+		this.#dom.link.href = this.likersUrl;
+
 		if (!this.data.post || !useCache) {
 			await this.fetch({ force: !useCache });
 		}
