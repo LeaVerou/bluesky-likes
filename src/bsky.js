@@ -14,16 +14,10 @@ let cacheByEndpoint = Object.fromEntries(Object.values(endpoints).map(endpoint =
  * @returns {object} {handle, postId}
  */
 export function parsePostUrl (url) {
-	let ret = {};
-	ret.handle = url.match(/\/profile\/([^\/]+)/)?.[1];
-	ret.postId = url.match(/\/post\/([^\/]+)/)?.[1];
-
-	if (ret.handle.startsWith("did:")) {
-		ret.did = ret.handle;
-		ret.handle = null;
-	}
-
-	return ret;
+	return {
+		handle: url.match(/\/profile\/([^\/]+)/)?.[1],
+		postId: url.match(/\/post\/([^\/]+)/)?.[1],
+	};
 }
 
 export async function getProfile (handle) {
