@@ -1,9 +1,10 @@
 # <img src="logo.svg" height="28"> BlueSky Likes Components
 
 Components to display (and encourage) likes on [BlueSky](https://bsky.app) posts.
+Can be used separately, or together.
 
-- `<bluesky-likes>`: Displays the number of likes on a post.
-- `<bluesky-likers>`: Displays avatars of users who liked a post.
+- [`<bluesky-likes>`](#bluesky-likes): Displays the number of likes on a post.
+- [`<bluesky-likers>`](#bluesky-likers): Displays avatars of users who liked a post.
 
 For a demo, check out https://projects.verou.me/bluesky-likes/
 
@@ -51,10 +52,10 @@ Pretty much all styling is on the host element, so you can just override regular
 
 ### States
 
-| Name      | Description                                             |
-| --------- | ------------------------------------------------------- |
-| `loading` | Indicates that the component is currently loading data. |
-| `empty`   | Indicates that there are no likers to display.          |
+| Name      | Description                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `loading` | Indicates that the component is currently loading data. Note that the state will be removed when data loads and the component is updated, not after all avatars load. |
+| `empty`   | Indicates that there are no likers to display.                                                                                                                        |
 
 ### Slots
 
