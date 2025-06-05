@@ -1,5 +1,5 @@
 import BlueskyLikes from "../likes/index.js";
-import { getPost, getPostLikes } from "../bsky.js";
+import { getPost, getPostLikes } from "../api.js";
 import styles from "./styles.js";
 import templates from "./templates.js";
 

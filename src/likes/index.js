@@ -1,4 +1,4 @@
-import { getPost } from "../bsky.js";
+import { getPost } from "../api.js";
 import styles from "./styles.js";
 
 let url = import.meta.url;

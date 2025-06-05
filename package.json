@@ -29,8 +29,10 @@
 		".": "./src/index.js",
 		"./likes": "./src/likes/index.js",
 		"./likers": "./src/likers/index.js",
+		"./api": "./src/api.js",
 		"./autoload": "./src/autoload.js"
 	},
+	"sideEffects": true,
 	"scripts": {
 		"release": "release-it",
 		"test": "echo \"Error: no test specified\" && exit 1"
