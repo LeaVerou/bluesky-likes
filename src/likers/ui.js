@@ -27,6 +27,8 @@ export const templates = {
 export const styles = `
 :host {
 	--avatar-size: calc(2em + 1vw);
+	/* This is registered as a <length>, so we can use smaller font sizes in more while keeping the same avatar size */
+	--bluesky-likers-avatar-size: var(--avatar-size);
 	--avatar-overlap-percentage: 0.3;
 	--avatar-overlap-percentage-y: 0.2;
 	--avatar-border: .15em solid canvas;
@@ -38,8 +40,8 @@ export const styles = `
 	--more-background: #1185fe;
 	--more-color-text: white;
 
-	--avatar-overlap: calc(var(--avatar-size) * var(--avatar-overlap-percentage));
-	--avatar-overlap-y: calc(var(--avatar-size) * var(--avatar-overlap-percentage-y));
+	--avatar-overlap: calc(var(--bluesky-likers-avatar-size) * var(--avatar-overlap-percentage));
+	--avatar-overlap-y: calc(var(--bluesky-likers-avatar-size) * var(--avatar-overlap-percentage-y));
 
 	display: block;
 	padding-inline-start: var(--avatar-overlap);
@@ -81,7 +83,7 @@ img {
 }
 
 [part~="avatar"] {
-	inline-size: var(--avatar-size);
+	block-size: var(--bluesky-likers-avatar-size);
 	aspect-ratio: 1;
 	object-fit: cover;
 	border-radius: 50%;
@@ -99,6 +101,7 @@ img {
 	font-weight: 600;
 	letter-spacing: -.03em;
 	text-indent: -.2em; /* visual centering to account for + */
+	font-size: calc(1em - clamp(0, var(--content-length) - 3, 10) * .05em);
 }
 `;
 

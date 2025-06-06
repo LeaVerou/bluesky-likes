@@ -8,6 +8,17 @@ export default class BlueskyLikers extends BlueskyLikes {
 	static sheet;
 	data = {};
 
+	constructor () {
+		super();
+
+		globalThis?.CSS?.registerProperty?.({
+			name: "--bluesky-likers-avatar-size",
+			initialValue: "48px",
+			syntax: "<length>",
+			inherits: true,
+		});
+	}
+
 	get likers () {
 		return this.data.likers ?? [];
 	}
