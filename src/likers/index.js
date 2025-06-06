@@ -60,6 +60,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 						hiddenCount: this.hiddenCount,
 						post: this.data.post,
 						url: this.src,
+						element: this,
 					}),
 				);
 			}

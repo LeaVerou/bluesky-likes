@@ -8,7 +8,7 @@ export const templates = {
 		return `
 			<a target="_blank" id="link" part="link">
 				<slot name="icon">${defaultIcon}</slot>
-				<span part="count">0</span>
+				<data value="0" part="count">0</data>
 				<slot></slot>
 			</a>`;
 	},

@@ -50,6 +50,13 @@ export default class BlueskyLikes extends HTMLElement {
 	}
 
 	connectedCallback () {
+		// Polyfill for https://github.com/whatwg/html/issues/7039
+		this._currentLang =
+			this.lang ||
+			this.parentNode.closest("[lang]")?.lang ||
+			this.ownerDocument.documentElement.lang ||
+			"en";
+
 		if (this.src) {
 			this.render({ useCache: true });
 		}
@@ -91,7 +98,10 @@ export default class BlueskyLikes extends HTMLElement {
 		}
 
 		if (this.data.post && this.#dom.count) {
-			this.#dom.count.textContent = this.likes;
+			this.#dom.count.value = this.likes;
+			this.#dom.count.textContent = this.likes.toLocaleString(this._currentLang, {
+				notation: "compact",
+			});
 		}
 		this._internals.states?.delete("loading");
 	}

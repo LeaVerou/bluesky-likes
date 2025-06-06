@@ -12,12 +12,12 @@ export const templates = {
 					${avatarSrc ? `<img src="${avatarSrc}" alt="" part="avatar avatar-img" loading="lazy" />` : ""}
 				</a>`;
 	},
-	more ({ hiddenCount, url }) {
-		let hiddenCountFormatted = hiddenCount.toLocaleString("en", {
+	more ({ hiddenCount, url, element }) {
+		let hiddenCountFormatted = hiddenCount.toLocaleString(element._currentLang || "en", {
 			notation: "compact",
 		});
 		let likedBy = url + "/liked-by";
-		return `<a href="${likedBy}" target="_blank" part="avatar link more">+${hiddenCountFormatted}</a>`;
+		return `<a href="${likedBy}" target="_blank" part="avatar link more" style="--content-length: ${hiddenCountFormatted.length + 1}">+${hiddenCountFormatted}</a>`;
 	},
 	empty ({ url }) {
 		return `No likes yet :( <a href="${url}" target="_blank">Be the first?</a>`;
