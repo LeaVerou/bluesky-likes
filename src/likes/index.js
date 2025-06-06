@@ -1,21 +1,5 @@
 import { getPost } from "../api.js";
-import styles from "./styles.js";
-
-let url = import.meta.url;
-
-const templates = {
-	root () {
-		let defaultIcon = url
-			? `<img src="${new URL("../../logo.svg", url)}" alt="🦋" part="icon" />`
-			: "🦋";
-		return `
-			<a target="_blank" id="link" part="link">
-				<slot name="icon">${defaultIcon}</slot>
-				<span part="count">0</span>
-				<slot></slot>
-			</a>`;
-	},
-};
+import { styles, templates } from "./ui.js";
 
 export default class BlueskyLikes extends HTMLElement {
 	static templates = templates;

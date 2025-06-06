@@ -1,4 +1,20 @@
-export default `
+let url = import.meta.url;
+
+export const templates = {
+	root () {
+		let defaultIcon = url
+			? `<img src="${new URL("../../logo.svg", url)}" alt="🦋" part="icon" />`
+			: "🦋";
+		return `
+			<a target="_blank" id="link" part="link">
+				<slot name="icon">${defaultIcon}</slot>
+				<span part="count">0</span>
+				<slot></slot>
+			</a>`;
+	},
+};
+
+export const styles = `
 :host {
 	display: inline-flex;
 	gap: 0.25em;

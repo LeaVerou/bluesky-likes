@@ -1,7 +1,6 @@
 import BlueskyLikes from "../likes/index.js";
-import { getPost, getPostLikes } from "../api.js";
-import styles from "./styles.js";
-import templates from "./templates.js";
+import { getPostLikes } from "../api.js";
+import { styles, templates } from "./ui.js";
 
 export default class BlueskyLikers extends BlueskyLikes {
 	static templates = templates;
