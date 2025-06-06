@@ -18,12 +18,14 @@ export const styles = `
 :host {
 	display: inline-flex;
 	gap: 0.25em;
+	align-items: center;
 	color: #1185fe;
 	border: max(1px, .07em) solid currentColor;
 	border-radius: 0.25em;
-	padding: 0.15em 0.3em;
+	padding: 0.25em 0.3em;
 	text-decoration: none;
 	font-weight: bold;
+	line-height: 1;
 }
 
 @keyframes loading {

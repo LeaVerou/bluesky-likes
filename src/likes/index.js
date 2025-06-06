@@ -57,6 +57,19 @@ export default class BlueskyLikes extends HTMLElement {
 			this.ownerDocument.documentElement.lang ||
 			"en";
 
+		// Only include a link iff the element is not within one
+		this._isInLink = this.closest("a[href]") !== null;
+
+		if (this._isInLink && this.#dom.link?.parentNode) {
+			// Is inside a link, but we also have a link
+			this.#dom.link.replaceWith(...this.#dom.link.childNodes);
+		}
+		else if (!this._isInLink && !this.#dom.link?.parentNode) {
+			// Is not inside a link, but we don't have a link, (re-)insert it
+			this._setShadowHTML(templates.root());
+			this.init();
+		}
+
 		if (this.src) {
 			this.render({ useCache: true });
 		}
@@ -91,7 +104,13 @@ export default class BlueskyLikes extends HTMLElement {
 
 	async render ({ useCache = false } = {}) {
 		this._internals.states?.add("loading");
-		this.#dom.link.href = this.likersUrl;
+
+		if (this._isInsideLink) {
+			// Remove link from the DOM
+		}
+		else {
+			this.#dom.link.href = this.likersUrl;
+		}
 
 		if (!this.data.post || !useCache) {
 			await this.fetch({ force: !useCache });
