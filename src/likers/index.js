@@ -63,20 +63,15 @@ export default class BlueskyLikers extends BlueskyLikes {
 
 			this.hiddenCount = likes - likers.length;
 
-			let html = likers.map(liker => templates.user(liker));
-
-			if (this.hiddenCount > 0) {
-				html.push(
-					templates.more({
-						hiddenCount: this.hiddenCount,
-						post: this.data.post,
-						url: this.src,
-						element: this,
-					}),
-				);
-			}
-
-			this._setShadowHTML(html.join(" "));
+			this._setShadowHTML(
+				templates.root({
+					likers,
+					hiddenCount: this.hiddenCount,
+					post: this.data.post,
+					url: this.src,
+					element: this,
+				}),
+			);
 		}
 		else {
 			this._internals.states?.add("empty");

@@ -1,6 +1,8 @@
 export const templates = {
-	root () {
-		return "";
+	root ({ likers, hiddenCount, url, element } = {}) {
+		return `${likers?.map(liker => this.user(liker)).join(" ")}
+		${hiddenCount > 0 ? this.more({ hiddenCount, url, element }) : ""}
+		<slot class="visually-hidden"></slot>`;
 	},
 	user ({ actor }) {
 		let title = actor.displayName
@@ -8,16 +10,16 @@ export const templates = {
 			: `@${actor.handle}`;
 		let avatarSrc = actor.avatar?.replace("avatar", "avatar_thumbnail");
 		return `
-				<a href="https://bsky.app/profile/${actor.handle}" target="_blank" rel="nofollow" part="profile-link link${avatarSrc ? "" : " avatar"}" title="${title}">
-					${avatarSrc ? `<img src="${avatarSrc}" alt="" part="avatar avatar-img" loading="lazy" />` : ""}
-				</a>`;
+			<a href="https://bsky.app/profile/${actor.handle}" target="_blank" rel="nofollow" tabindex="-1" part="profile-link link${avatarSrc ? "" : " avatar"}" title="${title}">
+				${avatarSrc ? `<img src="${avatarSrc}" alt="" part="avatar avatar-img" loading="lazy" />` : ""}
+			</a>`;
 	},
 	more ({ hiddenCount, url, element }) {
 		let hiddenCountFormatted = hiddenCount.toLocaleString(element._currentLang || "en", {
 			notation: "compact",
 		});
 		let likedBy = url + "/liked-by";
-		return `<a href="${likedBy}" target="_blank" part="avatar link more" style="--content-length: ${hiddenCountFormatted.length + 1}">+${hiddenCountFormatted}</a>`;
+		return `<a href="${likedBy}" target="_blank" part="avatar link more" tabindex="-1" style="--content-length: ${hiddenCountFormatted.length + 1}">+${hiddenCountFormatted}</a>`;
 	},
 	empty ({ url }) {
 		return `No likes yet :( <a href="${url}" target="_blank">Be the first?</a>`;
@@ -102,6 +104,22 @@ img {
 	letter-spacing: -.03em;
 	text-indent: -.2em; /* visual centering to account for + */
 	font-size: calc(1em - clamp(0, var(--content-length) - 3, 10) * .05em);
+}
+
+.visually-hidden {
+	position: absolute;
+
+	&:not(:focus-within) {
+		display: block;
+		width: 1px;
+		height: 1px;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		border: none;
+		overflow: hidden;
+		white-space: nowrap;
+		padding: 0;
+	}
 }
 `;
 

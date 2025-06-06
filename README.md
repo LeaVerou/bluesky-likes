@@ -32,7 +32,7 @@ These components are designed to make common cases easy, and complex cases possi
 
 - **Dynamic**: Components respond to changes in the URL of the post — or when it’s lazily set later
 - **Ultra-lightweight**: The whole package is [~2 KB minified & gzipped](https://bundlephobia.com/package/bluesky-likes) and dependency-free
-- [**Accessible**](#accessibility-notes) & **i18n** friendly
+- [**Accessible**](#accessibility-notes) & [**i18n** friendly](#i18n-notes)
 - **Autoloading** is available to take the hassle out of figuring out when to load the components
 - **Highly customizable styling** via regular CSS properties, custom properties, states, and parts (but also beautiful by default so you don’t have to).
 - **Customizable content** via slots
@@ -126,9 +126,10 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 
 ### Slots
 
-| Name    | Description                                 |
-| ------- | ------------------------------------------- |
-| `empty` | Content displayed when there are no likers. |
+| Name        | Description                                                                                       |
+| ----------- | ------------------------------------------------------------------------------------------------- |
+| _(Default)_ | Visually hidden content for screen reader users. See [Accessibility Notes](#accessibility-notes). |
+| `empty`     | Content displayed when there are no likers.                                                       |
 
 ### Custom properties
 
@@ -205,10 +206,11 @@ Unless otherwise mentioned, all functions are async.
 
 ## Accessibility Notes
 
-These components are designed with accessibility in mind, in the sense that they use semantically appropriate HTML elements.
+These components are designed with accessibility in mind,
+in the sense that they use semantically appropriate HTML elements
+and have been tested with screen readers.
 
-However, they are intended to be used in a way that communicates their purpose to screen readers through context,
-just like for sighted users (e.g. check out the example in the beginning).
+However, the accessibility of the end result also depends on how you use them.
 
 ### `<bluesky-likes>`
 
@@ -217,6 +219,26 @@ To change this, you can slot in your own icon with a different alt text.
 
 By default, the link’s title is "View all Bluesky likes".
 To localize this, you can wrap the element in another link, with your own title.
+
+### `<bluesky-likers>`
+
+This component is intended to be used in a way that communicates its purpose to screen readers through **context**.
+If you just display a list of avatars with no other context, sighted users would be puzzled just as much.
+You can check out the example in the beginning for one possible way to do this.
+
+One thing to note is that all avatars are wrapped in links that point to the user’s profile.
+To prevent these links from trapping focus for keyboard users, they all have `tabindex="-1"`,
+otherwise keyboard users would have to hit Tab 101 times in the worst case to escape the component, which would be _bad_.
+
+In the odd case where you’re using this component entirely by itself with no other link around it,
+you can provide content to screen readers via the default slot.
+This content will be visually hidden unless focused.
+
+## i18n Notes
+
+- Number formatting uses locale-aware formatting (via `Intl.NumberFormat`) using the element’s inherited language.
+- CSS uses logical properties where appropriate, so that the components can be used in right-to-left languages without changes
+- Any content that may need to be localized has a way to replace it (e.g. via slots)
 
 ## Credits
 
