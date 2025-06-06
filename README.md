@@ -32,7 +32,7 @@ These components are designed to make common cases easy, and complex cases possi
 
 - **Dynamic**: Components respond to changes in the URL of the post — or when it’s lazily set later
 - **Ultra-lightweight**: The whole package is [~2 KB minified & gzipped](https://bundlephobia.com/package/bluesky-likes) and dependency-free
-- **Accessible** & **i18n** ready
+- [**Accessible**](#accessibility-notes) & **i18n** friendly
 - **Autoloading** is available to take the hassle out of figuring out when to load the components
 - **Highly customizable styling** via regular CSS properties, custom properties, states, and parts (but also beautiful by default so you don’t have to).
 - **Customizable content** via slots
@@ -96,10 +96,11 @@ Pretty much all styling is on the host element, so you can just override regular
 
 ### Parts
 
-| Name    | Description                                |
-| ------- | ------------------------------------------ |
-| `link`  | The `<a>` element that links to all likes. |
-| `count` | The `<span>` that contains the like count. |
+| Name    | Description                                                                   |
+| ------- | ----------------------------------------------------------------------------- |
+| `link`  | The `<a>` element that links to all likes.                                    |
+| `count` | The `<span>` that contains the like count.                                    |
+| `icon`  | The default icon which is displayed if nothing is slotted in the `icon` slot. |
 
 ## `<bluesky-likers>`
 
@@ -201,6 +202,21 @@ Also these, though you probably won’t need them unless you’re making new API
 - `getPostUri(url)`: Fetches a post AT URI by its URL.
 
 Unless otherwise mentioned, all functions are async.
+
+## Accessibility Notes
+
+These components are designed with accessibility in mind, in the sense that they use semantically appropriate HTML elements.
+
+However, they are intended to be used in a way that communicates their purpose to screen readers through context,
+just like for sighted users (e.g. check out the example in the beginning).
+
+### `<bluesky-likes>`
+
+By default, the icon’s alt text is empty, since it is considered presentational.
+To change this, you can slot in your own icon with a different alt text.
+
+By default, the link’s title is "View all Bluesky likes".
+To localize this, you can wrap the element in another link, with your own title.
 
 ## Credits
 

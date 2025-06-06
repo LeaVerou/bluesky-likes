@@ -3,10 +3,10 @@ let url = import.meta.url;
 export const templates = {
 	root () {
 		let defaultIcon = url
-			? `<img src="${new URL("../../logo.svg", url)}" alt="🦋" part="icon" />`
+			? `<img src="${new URL("../../logo.svg", url)}" alt="" part="icon" />`
 			: "🦋";
 		return `
-			<a target="_blank" id="link" part="link">
+			<a target="_blank" id="link" part="link" title="View all Bluesky likes">
 				<slot name="icon">${defaultIcon}</slot>
 				<data value="0" part="count">0</data>
 				<slot></slot>
