@@ -7,6 +7,17 @@
 		<link rel="icon" href="./logo.svg" />
 		<link rel="stylesheet" href="./demo/style.css" />
 		<script src="./src/autoload.js" type="module"></script>
+		<script>
+			function renderDemo() {
+				for (let el of document.querySelectorAll("bluesky-likes, bluesky-likers")) {
+					el.src = url.value;
+
+					if (el.tagName === "BLUESKY-LIKERS") {
+						el.max = max.value;
+					}
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<header>
@@ -14,7 +25,7 @@
 			<h1>Bluesky Likes Components</h1>
 			<nav>
 				<a href="https://github.com/leaverou/bluesky-likes#readme">Docs</a> &bull;
-				<a href="https://github.com/leaverou/bluesky-likes/issues">Bug tracker</a> &bull;
+				<a href="https://github.com/leaverou/bluesky-likes/issues">Bugs & Ideas</a> &bull;
 				<a href="https://github.com/leaverou/bluesky-likes">GitHub</a> &bull;
 				<a href="http://npmjs.com/package/bluesky-likes">npm</a> &bull;
 				<a href="https://lea.verou.me/">Background</a> &bull;
@@ -22,9 +33,7 @@
 			</nav>
 		</header>
 
-		<form
-			onsubmit="event.preventDefault(); likes.src = likers.src = url.value; likers.max = max.value"
-		>
+		<form onsubmit="event.preventDefault(); renderDemo()">
 			<label>
 				Post URL:
 				<input
