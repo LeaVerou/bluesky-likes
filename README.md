@@ -31,6 +31,7 @@ E.g. for something similar to [Salma Alam-Nayor’s](https://whitep4nth3r.com/bl
 These components are designed to make common cases easy, and complex cases possible.
 
 - **Dynamic**: Components respond to changes in the URL of the post — or when it’s lazily set later
+- **Aggressive caching**: API calls are cached even across component instances, so you can have multiple components about the same post without making duplicate requests.
 - **Ultra-lightweight**: The whole package is [~2 KB minified & gzipped](https://bundlephobia.com/package/bluesky-likes) and dependency-free
 - [**Accessible**](#accessibility-notes) & [**i18n** friendly](#i18n-notes)
 - **Autoloading** is available to take the hassle out of figuring out when to load the components
