@@ -131,9 +131,9 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 ### Attributes
 
 | Attribute | Type     | Description                                               |
-| --------- | -------- | --------------------------------------------------------- | --- |
+| --------- | -------- | --------------------------------------------------------- |
 | `src`     | `string` | The URL of the post to display likes for.                 |
-| `max`     | `number` | The maximum number of avatars to display. Defaults to 50. |     |
+| `max`     | `number` | The maximum number of avatars to display. Defaults to 50. |
 
 ### Slots
 
