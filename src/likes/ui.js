@@ -42,6 +42,10 @@ a {
 	text-decoration: none;
 }
 
+:host:has(a:hover) {
+	background: lab(from currentColor l a b / 0.1);
+}
+
 [part=icon] {
 	block-size: 1em;
 	vertical-align: -0.16em;
