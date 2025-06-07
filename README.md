@@ -91,12 +91,6 @@ To link to a different URL (e.g. the post itself), simply wrap the component in 
 | --------- | -------- | ----------------------------------------- |
 | `src`     | `string` | The URL of the post to display likes for. |
 
-### States
-
-| Name      | Description                                             |
-| --------- | ------------------------------------------------------- |
-| `loading` | Indicates that the component is currently loading data. |
-
 ### Slots
 
 | Name        | Description                    |
@@ -104,18 +98,26 @@ To link to a different URL (e.g. the post itself), simply wrap the component in 
 | _(Default)_ | Content added after the count. |
 | `prefix`    | Custom icon                    |
 
-### Custom properties
+### Styling
+
+#### Custom properties
 
 None!
 Pretty much all styling is on the host element, so you can just override regular CSS properties such as `border`, `padding` or `color` to restyle the component.
 
-### Parts
+#### [Parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part)
 
 | Name    | Description                                                                     |
 | ------- | ------------------------------------------------------------------------------- |
 | `link`  | The `<a>` element that links to all likes.                                      |
 | `count` | The `<span>` that contains the like count.                                      |
 | `icon`  | The default icon which is displayed if nothing is slotted in the `prefix` slot. |
+
+#### [States](https://developer.mozilla.org/en-US/docs/Web/CSS/:state)
+
+| Name      | Description                                             |
+| --------- | ------------------------------------------------------- |
+| `loading` | Indicates that the component is currently loading data. |
 
 ## `<bluesky-likers>`
 
@@ -145,7 +147,7 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 
 - Apply `text-wrap: balance` to the component to equalize the width of the rows.
 
-#### CSS States
+#### [States](https://developer.mozilla.org/en-US/docs/Web/CSS/:state)
 
 | Name      | Description                                                                                                                                                           |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -167,7 +169,7 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 | `--avatar-overlap`              | `calc(var(--avatar-size) \* var(--avatar-overlap-percentage))`   | The actual horizontal overlap between avatars (as a `<length>`).                     |
 | `--avatar-overlap-y`            | `calc(var(--avatar-size) \* var(--avatar-overlap-percentage-y))` | The actual vertical overlap between avatars (as a `<length>`).                       |
 
-### Parts
+### [Parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part)
 
 | Name           | Description                                                                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
