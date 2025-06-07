@@ -87,7 +87,7 @@ Displays the number of likes on a post and links to the full list.
 | Name        | Description                    |
 | ----------- | ------------------------------ |
 | _(Default)_ | Content added after the count. |
-| `icon`      | Custom icon                    |
+| `prefix`    | Custom icon                    |
 
 ### Custom properties
 

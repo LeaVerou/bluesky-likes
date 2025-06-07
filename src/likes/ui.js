@@ -7,7 +7,7 @@ export const templates = {
 			: "🦋";
 		return `
 			<a target="_blank" id="link" part="link" title="View all Bluesky likes">
-				<slot name="icon">${defaultIcon}</slot>
+				<slot name="prefix">${defaultIcon}</slot>
 				<data value="0" part="count">0</data>
 				<slot></slot>
 			</a>`;
