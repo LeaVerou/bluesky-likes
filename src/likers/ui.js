@@ -92,6 +92,12 @@ img {
 	box-shadow: var(--avatar-shadow);
 	border: var(--avatar-border);
 	background: var(--avatar-background);
+	transition: scale 0.1s ease-in-out;
+
+	&:hover,
+	&:focus {
+		scale: 1.1;
+	}
 }
 
 [part~="more"] {
