@@ -47,6 +47,13 @@ All it takes is pasting this into your HTML and you’re ready to use the compon
 <script src="https://unpkg.com/bluesky-likes/autoload" type="module"></script>
 ```
 
+Or, if you know which ones you need, you can import them individually:
+
+```html
+<script src="https://unpkg.com/bluesky-likes/likes" type="module"></script>
+<script src="https://unpkg.com/bluesky-likes/likers" type="module"></script>
+```
+
 You can also install the components via npm and use with your toolchain of choice:
 
 ```bash
@@ -68,6 +75,14 @@ Displays the number of likes on a post and links to the full list.
 
 ```html
 <bluesky-likes src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"></bluesky-likes>
+```
+
+To link to a different URL (e.g. the post itself), simply wrap the component in a link:
+
+```html
+<a href="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n">
+	<bluesky-likes src="https://bsky.app/profile/lea.verou.me/post/3lhygzakuic2n"></bluesky-likes>
+</a>
 ```
 
 ### Attributes
@@ -96,11 +111,11 @@ Pretty much all styling is on the host element, so you can just override regular
 
 ### Parts
 
-| Name    | Description                                                                   |
-| ------- | ----------------------------------------------------------------------------- |
-| `link`  | The `<a>` element that links to all likes.                                    |
-| `count` | The `<span>` that contains the like count.                                    |
-| `icon`  | The default icon which is displayed if nothing is slotted in the `icon` slot. |
+| Name    | Description                                                                     |
+| ------- | ------------------------------------------------------------------------------- |
+| `link`  | The `<a>` element that links to all likes.                                      |
+| `count` | The `<span>` that contains the like count.                                      |
+| `icon`  | The default icon which is displayed if nothing is slotted in the `prefix` slot. |
 
 ## `<bluesky-likers>`
 
@@ -113,16 +128,9 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 ### Attributes
 
 | Attribute | Type     | Description                                               |
-| --------- | -------- | --------------------------------------------------------- |
+| --------- | -------- | --------------------------------------------------------- | --- |
 | `src`     | `string` | The URL of the post to display likes for.                 |
-| `max`     | `number` | The maximum number of avatars to display. Defaults to 50. |
-
-### States
-
-| Name      | Description                                                                                                                                                           |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `loading` | Indicates that the component is currently loading data. Note that the state will be removed when data loads and the component is updated, not after all avatars load. |
-| `empty`   | Indicates that there are no likers to display.                                                                                                                        |
+| `max`     | `number` | The maximum number of avatars to display. Defaults to 50. |     |
 
 ### Slots
 
@@ -131,7 +139,20 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 | _(Default)_ | Visually hidden content for screen reader users. See [Accessibility Notes](#accessibility-notes). |
 | `empty`     | Content displayed when there are no likers.                                                       |
 
-### Custom properties
+### Styling
+
+#### Recipes
+
+- Apply `text-wrap: balance` to the component to equalize the width of the rows.
+
+#### CSS States
+
+| Name      | Description                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `loading` | Indicates that the component is currently loading data. Note that the state will be removed when data loads and the component is updated, not after all avatars load. |
+| `empty`   | Indicates that there are no likers to display.                                                                                                                        |
+
+#### Custom properties
 
 | Name                            | Default Value                                                    | Description                                                                          |
 | ------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
