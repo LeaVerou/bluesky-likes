@@ -103,7 +103,7 @@ img {
 	font-weight: 600;
 	letter-spacing: -.03em;
 	text-indent: -.2em; /* visual centering to account for + */
-	font-size: calc(1em - clamp(0, var(--content-length) - 3, 10) * .05em);
+	font-size: calc(var(--bluesky-likers-avatar-size) / 3 - clamp(0, var(--content-length) - 3, 10) * .05em);
 }
 
 .visually-hidden {
