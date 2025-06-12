@@ -72,7 +72,7 @@ export async function getPostUri (postUrl) {
 		return undefined;
 	}
 
-	let did = post.did ?? (await getDid(post.handle));
+	let did = await getDid(post.handle);
 
 	if (!did) {
 		return undefined;
