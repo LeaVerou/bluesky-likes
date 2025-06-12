@@ -32,8 +32,11 @@
 		"./api": "./src/api.js",
 		"./autoload": "./src/autoload.js"
 	},
+	"types": "./types/index.d.ts",
 	"sideEffects": true,
 	"scripts": {
+		"build:types": "tsc --allowJs --emitDeclarationOnly --outDir types --declaration src/index.js",
+		"prepublishOnly": "npm run build:types",
 		"release": "release-it",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -41,6 +44,7 @@
 		"prettier-plugin-brace-style": "latest",
 		"prettier-plugin-merge": "latest",
 		"prettier-plugin-space-before-function-paren": "latest",
-		"release-it": "latest"
+		"release-it": "latest",
+		"typescript": "^5.8.3"
 	}
 }
