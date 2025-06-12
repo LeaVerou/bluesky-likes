@@ -75,10 +75,16 @@ export default class BlueskyLikes extends HTMLElement {
 		}
 	}
 
+	/**
+	 * @returns {import("../api.js").BlueskyPost | undefined}
+	 */
 	get post () {
 		return this.data.post;
 	}
 
+	/**
+	 * @returns {number}
+	 */
 	get likes () {
 		return this.data.post?.likeCount ?? 0;
 	}
