@@ -35,7 +35,7 @@
 	"types": "./types/index.d.ts",
 	"sideEffects": true,
 	"scripts": {
-		"build:types": "tsc --allowJs --emitDeclarationOnly --outDir types --declaration src/index.js",
+		"build:types": "tsc --allowJs --emitDeclarationOnly --declaration --outDir types src/index.js src/autoload.js",
 		"build": "npm run build:types",
 		"prepublishOnly": "npm run build:types",
 		"release": "release-it",
