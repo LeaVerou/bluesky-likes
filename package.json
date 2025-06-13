@@ -36,6 +36,7 @@
 	"sideEffects": true,
 	"scripts": {
 		"build:types": "tsc --allowJs --emitDeclarationOnly --outDir types --declaration src/index.js",
+		"build": "npm run build:types",
 		"prepublishOnly": "npm run build:types",
 		"release": "release-it",
 		"test": "echo \"Error: no test specified\" && exit 1"
