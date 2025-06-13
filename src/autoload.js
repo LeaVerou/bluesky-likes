@@ -5,6 +5,7 @@ if (globalThis.document) {
 	discover(document.body);
 }
 
+/** @param {Node} node */
 export function observe (node) {
 	observer ??= new MutationObserver(mutations => {
 		for (const { addedNodes } of mutations) {
@@ -18,10 +19,12 @@ export function observe (node) {
 	observer.observe(node, { childList: true, subtree: true });
 }
 
+/** @param {Node} node */
 export function unobserve (node) {
 	observer.unobserve(node);
 }
 
+/** @param {Element} node */
 export function discover (node) {
 	for (let i = 0; i < components.length; i++) {
 		let component = components[i];
