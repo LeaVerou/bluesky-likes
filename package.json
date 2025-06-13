@@ -26,11 +26,26 @@
 	"type": "module",
 	"main": "src/index.js",
 	"exports": {
-		".": "./src/index.js",
-		"./likes": "./src/likes/index.js",
-		"./likers": "./src/likers/index.js",
-		"./api": "./src/api.js",
-		"./autoload": "./src/autoload.js"
+		".": {
+			"import": "./src/index.js",
+			"types": "./types/index.d.ts"
+		},
+		"./likes": {
+			"import": "./src/likes/index.js",
+			"types": "./types/likes/index.d.ts"
+		},
+		"./likers": {
+			"import": "./src/likers/index.js",
+			"types": "./types/likers/index.d.ts"
+		},
+		"./api": {
+			"import": "./src/api.js",
+			"types": "./types/api.d.ts"
+		},
+		"./autoload": {
+			"import": "./src/autoload.js",
+			"types": "./types/autoload.d.ts"
+		}
 	},
 	"types": "./types/index.d.ts",
 	"sideEffects": true,
