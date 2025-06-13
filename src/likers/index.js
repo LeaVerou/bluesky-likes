@@ -19,6 +19,9 @@ export default class BlueskyLikers extends BlueskyLikes {
 		});
 	}
 
+	/**
+	 * @returns {import("../api.js").BlueskyLike[]}
+	 */
 	get likers () {
 		return this.data.likers ?? [];
 	}
