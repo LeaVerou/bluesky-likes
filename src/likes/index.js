@@ -1,6 +1,27 @@
 import { getPost } from "../api.js";
 import { styles, templates } from "./ui.js";
 
+/**
+ * @customElement bluesky-likes
+ * @element bluesky-likes
+ *
+ * Displays the number of likes on a post and links to the full list.
+ *
+ * @attr {string} src - The URL of the post to display likes for. This is the only required attribute and must be a valid Bluesky post URL.
+ *
+ * @prop {BlueskyPost | undefined} post - The Bluesky post data containing information about the post, including its author, content, and engagement metrics
+ * @prop {number} likes - The number of likes on the post
+ * @prop {string} likersUrl - The URL to view the post's likers
+ *
+ * @slot - Content added after the likes count, typically used for additional information or actions
+ * @slot prefix - Custom icon to replace the default heart icon. The icon should be an inline SVG or image element.
+ *
+ * @csspart count - The element that displays the likes count, formatted according to the user's locale
+ * @csspart link - The link to view the post's likers, automatically removed if the component is placed inside another link
+ * @csspart icon - The default heart icon which is displayed if nothing is slotted in the prefix slot
+ *
+ * @state loading - Indicates that the component is currently loading data from the Bluesky API
+ */
 export default class BlueskyLikes extends HTMLElement {
 	static templates = templates;
 	static styles = styles;

@@ -36,12 +36,14 @@
 	"sideEffects": true,
 	"scripts": {
 		"build:types": "tsc --allowJs --emitDeclarationOnly --declaration --outDir types src/index.js src/autoload.js",
-		"build": "npm run build:types",
-		"prepublishOnly": "npm run build:types",
+		"build:cem": "cem analyze --litelement",
+		"build": "npm run build:types && npm run build:cem",
+		"prepublishOnly": "npm run build",
 		"release": "release-it",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
+		"@custom-elements-manifest/analyzer": "^0.8.0",
 		"prettier-plugin-brace-style": "latest",
 		"prettier-plugin-merge": "latest",
 		"prettier-plugin-space-before-function-paren": "latest",
