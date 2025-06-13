@@ -8,7 +8,7 @@ let endpoints = {
 
 /**
  * Cached API responses by endpoint
- * @type {Record<string, Record<string, Promise<BlueskyProfile | BlueskyPost | BlueskyLike[] | null | undefined>>>}
+ * @type {Record<string, Record<string, BlueskyProfile | BlueskyPost | BlueskyLike[] | Promise<BlueskyProfile | BlueskyPost | BlueskyLike[] | null | undefined> | null | undefined>>}
  */
 export const cacheByEndpoint = Object.fromEntries(
 	Object.values(endpoints).map(endpoint => [endpoint, {}]),
@@ -32,7 +32,7 @@ export function parsePostUrl (url) {
  * @param {string} handle
  * @param {Object} [options]
  * @param {boolean} [options.force] - Bypass the cache and fetch the data again even if cached.
- * @returns {Promise<BlueskyProfile>}
+ * @returns {Promise<BlueskyProfile | null | undefined>}
  */
 export async function getProfile (handle, options = {}) {
 	let endpoint = endpoints.profile;
@@ -54,7 +54,7 @@ export async function getProfile (handle, options = {}) {
  * Get the DID of a user by their handle.
  * Does not send an API call if the handle is already a DID.
  * @param {string} handle
- * @returns {Promise<string>}
+ * @returns {Promise<string | undefined>}
  */
 export async function getDid (handle) {
 	if (handle.startsWith("did:")) {
