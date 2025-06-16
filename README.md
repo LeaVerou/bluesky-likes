@@ -261,6 +261,8 @@ You can customize that content by providing your own content in the default slot
 > </bluesky-likers>
 > ```
 >
+> ^ It may not look like it, but here we’ve also slotted a few blank text nodes to the default slot.
+>
 > To avoid this, you can use the `description` slot instead.
 
 The component includes links to the profiles of the users who liked the post (with `rel="nofollow"`),
