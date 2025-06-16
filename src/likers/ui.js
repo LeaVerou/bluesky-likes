@@ -1,8 +1,9 @@
 export const templates = {
 	root ({ likers, hiddenCount, url, element } = {}) {
-		return `${likers?.map(liker => this.user(liker)).join(" ")}
+		return `<slot class="visually-hidden"></slot>
+		${likers?.map(liker => this.user(liker)).join(" ")}
 		${hiddenCount > 0 ? this.more({ hiddenCount, url, element }) : ""}
-		<slot class="visually-hidden"></slot>`;
+		`;
 	},
 	user ({ actor }) {
 		let title = actor.displayName
