@@ -16,12 +16,14 @@ import { styles, templates } from "./ui.js";
  *
  * @slot - Visually hidden content for screen reader users, providing additional context about the likers
  * @slot empty - Content displayed when there are no likers, defaults to a message with a link to the post
+ * @slot skip - Content for the skip link, defaults to "Skip to end"
  *
  * @csspart avatar - The circular element that displays a user's avatar or the "+N" indicator for additional likers
  * @csspart avatar-img - The img element for users with an avatar, with lazy loading enabled
  * @csspart link - The a element that wraps each entry, providing hover and focus states
  * @csspart profile-link - The a element that links to the user's profile on Bluesky
  * @csspart more - The a element that displays the hidden count and links to the full list of likers
+ * @csspart skip-link - The a element that links to the end of the likers list for keyboard and screen reader users
  *
  * @cssproperty --avatar-size - The size of each avatar (default: calc(2em + 1vw))
  * @cssproperty --bluesky-likers-avatar-size - The size of the avatar images (inherits from --avatar-size)
@@ -123,6 +125,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 			this._setShadowHTML(
 				templates.root({
 					likers,
+					likes,
 					hiddenCount: this.hiddenCount,
 					post: this.data.post,
 					url: this.src,

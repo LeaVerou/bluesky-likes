@@ -141,6 +141,7 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 | ----------- | ------------------------------------------------------------------------------------------------- |
 | _(Default)_ | Visually hidden content for screen reader users. See [Accessibility Notes](#accessibility-notes). |
 | `empty`     | Content displayed when there are no likers.                                                       |
+| `skip`      | Content for the skip link. See [Accessibility Notes](#accessibility-notes).                       |
 
 ### Styling
 
@@ -179,6 +180,7 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 | `link`         | The `<a>` element that wraps each entry (either links to the user's profile, or to all likers)                                                                     |
 | `profile-link` | The `<a>` element that links to the user's profile.                                                                                                                |
 | `more`         | The `<a>` element that displays the hidden count.                                                                                                                  |
+| `skip-link`    | The `<a>` element to skip to the end that is visually hidden but available to keyboard users and screen readers.                                                   |
 
 ## Autoloader
 
@@ -246,17 +248,12 @@ To localize this, you can wrap the element in another link, with your own title.
 
 ### `<bluesky-likers>`
 
-This component is intended to be used in a way that communicates its purpose to screen readers through **context**.
-If you just display a list of avatars with no other context, sighted users would be puzzled just as much.
-You can check out the example in the beginning for one possible way to do this.
+By default, the component includes a description for non-sighted users like "271 users liked this post, 50 shown".
+You can customize that content by providing your own content in the default slot.
 
-One thing to note is that all avatars are wrapped in links that point to the user’s profile.
-To prevent these links from trapping focus for keyboard users, they all have `tabindex="-1"`,
-otherwise keyboard users would have to hit Tab 101 times in the worst case to escape the component, which would be _bad_.
-
-In the odd case where you’re using this component entirely by itself with no other link around it,
-you can provide content to screen readers via the default slot.
-This content will be visually hidden unless focused.
+The component includes links to the profiles of the users who liked the post (with `rel="nofollow"`),
+and a skip link to skip to the end of the list.
+You can customize the content of the link via the `skip` slot and the styling of the link via the `skip-link` part.
 
 ## i18n Notes
 

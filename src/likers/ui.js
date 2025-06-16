@@ -1,9 +1,26 @@
 export const templates = {
-	root ({ likers, hiddenCount, url, element } = {}) {
-		return `<slot class="visually-hidden"></slot>
+	root ({ likers, likes, hiddenCount, url, element } = {}) {
+		if (likes === 0) {
+			return this.empty({ url });
+		}
+
+		return `<slot class="visually-hidden-always">${this.description({ likes, hiddenCount })}</slot>
+		${this.skipLink({ likers, likes, hiddenCount, url, element })}
 		${likers?.map(liker => this.user(liker)).join(" ")}
-		${hiddenCount > 0 ? this.more({ hiddenCount, url, element }) : ""}
-		`;
+		${hiddenCount > 0 ? this.more({ hiddenCount, url, element }) : ""}`;
+	},
+	skipLink ({ likes }) {
+		if (likes <= 2) {
+			return "";
+		}
+
+		return `
+		<a part="skip-link" class="visually-hidden" href="#" onclick="[...this.getRootNode().host.shadowRoot.querySelectorAll('a')].at(-1)?.focus(); return false;">
+			<slot name="skip">Skip to end</slot>
+		</a>`;
+	},
+	description ({ likes, hiddenCount }) {
+		return `${likes} users liked this post${hiddenCount > 0 ? `, ${likers.length} shown` : ""}.`;
 	},
 	user ({ actor }) {
 		let title = actor.displayName
@@ -11,7 +28,7 @@ export const templates = {
 			: `@${actor.handle}`;
 		let avatarSrc = actor.avatar?.replace("avatar", "avatar_thumbnail");
 		return `
-			<a href="https://bsky.app/profile/${actor.handle}" target="_blank" rel="nofollow" tabindex="-1" part="profile-link link${avatarSrc ? "" : " avatar"}" title="${title}">
+			<a href="https://bsky.app/profile/${actor.handle}" target="_blank" rel="nofollow" part="profile-link link${avatarSrc ? "" : " avatar"}" title="${title}">
 				${avatarSrc ? `<img src="${avatarSrc}" alt="" part="avatar avatar-img" loading="lazy" />` : ""}
 			</a>`;
 	},
@@ -20,7 +37,7 @@ export const templates = {
 			notation: "compact",
 		});
 		let likedBy = url + "/liked-by";
-		return `<a href="${likedBy}" target="_blank" part="avatar link more" tabindex="-1" style="--content-length: ${hiddenCountFormatted.length + 1}">+${hiddenCountFormatted}</a>`;
+		return `<a id="more-link" href="${likedBy}" target="_blank" part="avatar link more" style="--content-length: ${hiddenCountFormatted.length + 1}">+${hiddenCountFormatted}</a>`;
 	},
 	empty ({ url }) {
 		return `No likes yet :( <a href="${url}" target="_blank">Be the first?</a>`;
@@ -113,20 +130,29 @@ img {
 	font-size: calc(var(--bluesky-likers-avatar-size) / 3 - clamp(0, var(--content-length) - 3, 10) * .05em);
 }
 
-.visually-hidden {
+.visually-hidden,
+.visually-hidden-always {
 	position: absolute;
+}
 
-	&:not(:focus-within) {
-		display: block;
-		width: 1px;
-		height: 1px;
-		clip: rect(0 0 0 0);
-		clip-path: inset(50%);
-		border: none;
-		overflow: hidden;
-		white-space: nowrap;
-		padding: 0;
-	}
+.visually-hidden:not(:focus-within),
+.visually-hidden-always {
+	display: block;
+	width: 1px;
+	height: 1px;
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	border: none;
+	overflow: hidden;
+	white-space: nowrap;
+	padding: 0;
+}
+
+[part~="skip-link"]:focus {
+	padding: 0.25em .5em;
+	background: canvas;
+	color: canvastext;
+	z-index: 1;
 }
 `;
 
