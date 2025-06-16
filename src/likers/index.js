@@ -42,11 +42,29 @@ export default class BlueskyLikers extends BlueskyLikes {
 	static templates = templates;
 	static styles = styles;
 	static sheet;
+
+	/**
+	 * Set to true once the first instance of the component is created.
+	 * @type {boolean}
+	 * @private
+	 */
+	static _initialized = false;
 	data = {};
 
 	constructor () {
 		super();
+		this.constructor.init();
+	}
 
+	static init () {
+		if (this._initialized) {
+			return;
+		}
+
+		this._initialized = true;
+
+		// Register the CSS custom property for the avatar size
+		// @property in Shadow DOM is not yet supported, we need to register it in the light DOM
 		globalThis?.CSS?.registerProperty?.({
 			name: "--bluesky-likers-avatar-size",
 			initialValue: "48px",
