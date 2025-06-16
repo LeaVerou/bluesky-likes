@@ -137,11 +137,12 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 
 ### Slots
 
-| Name        | Description                                                                                       |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| _(Default)_ | Visually hidden content for screen reader users. See [Accessibility Notes](#accessibility-notes). |
-| `empty`     | Content displayed when there are no likers.                                                       |
-| `skip`      | Content for the skip link. See [Accessibility Notes](#accessibility-notes).                       |
+| Name          | Description                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------- |
+| _(Default)_   | Same as `description`, with lower precedence.                                                     |
+| `empty`       | Content displayed when there are no likers.                                                       |
+| `skip`        | Content for the skip link. See [Accessibility Notes](#accessibility-notes).                       |
+| `description` | Visually hidden content for screen reader users. See [Accessibility Notes](#accessibility-notes). |
 
 ### Styling
 
@@ -250,6 +251,17 @@ To localize this, you can wrap the element in another link, with your own title.
 
 By default, the component includes a description for non-sighted users like "271 users liked this post, 50 shown".
 You can customize that content by providing your own content in the default slot.
+
+> [!CAUTION]
+> Beware of accidentally slotting blank text nodes in the default slot when slotting other elements, e.g.:
+>
+> ```html
+> <bluesky-likers src="...">
+>     <div slot="empty">No likers :(</div>
+> </bluesky-likers>
+> ```
+>
+> To avoid this, you can use the `description` slot instead.
 
 The component includes links to the profiles of the users who liked the post (with `rel="nofollow"`),
 and a skip link to skip to the end of the list.

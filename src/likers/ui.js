@@ -4,7 +4,7 @@ export const templates = {
 			return this.empty({ url });
 		}
 
-		return `<slot class="visually-hidden-always">${this.description({ likes, hiddenCount })}</slot>
+		return `<slot name="description" class="visually-hidden-always"><slot>${this.description({ likes, hiddenCount })}</slot></slot>
 		${this.skipLink({ likers, likes, hiddenCount, url, element })}
 		${likers?.map(liker => this.user(liker)).join(" ")}
 		${hiddenCount > 0 ? this.more({ hiddenCount, url, element }) : ""}`;
