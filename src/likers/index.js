@@ -56,6 +56,7 @@ export default class BlueskyLikers extends BlueskyLikes {
 	constructor () {
 		super();
 		this.constructor.init();
+		this._internals.ariaDescribedBy = "description";
 	}
 
 	static init () {
