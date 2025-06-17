@@ -16,7 +16,7 @@ export const templates = {
 
 		return `
 		<slot name="skip-link" onclick="this.getRootNode().host.handleEvent({ type: 'keyup', key: 'End' }); return false;" class="visually-hidden">
-			<a part="skip-link" href="#">
+			<a part="skip-link" href="#" title="Hit Home or End at any point to skip to the start or end of the list">
 				<slot name="skip-text">Skip to end</slot>
 			</a>
 		</slot>`;
