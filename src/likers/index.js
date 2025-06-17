@@ -57,6 +57,26 @@ export default class BlueskyLikers extends BlueskyLikes {
 		super();
 		this.constructor.init();
 		this._internals.ariaDescribedBy = "description";
+		this.addEventListener("keyup", this);
+	}
+
+	handleEvent (event) {
+		if (event.type === "keyup") {
+			if (event.key === "Home" || event.key === "End") {
+				event.preventDefault?.();
+				event.stopPropagation?.();
+				let links = Array.from(this.shadowRoot.querySelectorAll("a"));
+
+				if (links.length > 0) {
+					if (event.key === "Home") {
+						links.at(0)?.focus();
+					}
+					else {
+						links.at(-1)?.focus();
+					}
+				}
+			}
+		}
 	}
 
 	static init () {

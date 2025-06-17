@@ -15,7 +15,7 @@ export const templates = {
 		}
 
 		return `
-		<a part="skip-link" class="visually-hidden" href="#" onclick="[...this.getRootNode().host.shadowRoot.querySelectorAll('a')].at(-1)?.focus(); return false;">
+		<a part="skip-link" class="visually-hidden" href="#" onclick="this.getRootNode().host.handleEvent({ type: 'keyup', key: 'End' }); return false;">
 			<slot name="skip">Skip to end</slot>
 		</a>`;
 	},
