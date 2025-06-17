@@ -15,9 +15,11 @@ export const templates = {
 		}
 
 		return `
-		<a part="skip-link" class="visually-hidden" href="#" onclick="this.getRootNode().host.handleEvent({ type: 'keyup', key: 'End' }); return false;">
-			<slot name="skip">Skip to end</slot>
-		</a>`;
+		<slot name="skip-link" onclick="this.getRootNode().host.handleEvent({ type: 'keyup', key: 'End' }); return false;" class="visually-hidden">
+			<a part="skip-link" href="#">
+				<slot name="skip-text">Skip to end</slot>
+			</a>
+		</slot>`;
 	},
 	description ({ likes, hiddenCount }) {
 		return `${likes} users liked this post${hiddenCount > 0 ? `, ${likers.length} shown` : ""}.`;
@@ -148,11 +150,16 @@ img {
 	padding: 0;
 }
 
+slot[name="skip-link"]:focus-within {
+	display: block;
+	z-index: 1;
+}
+
+slot[name="skip-link"]::slotted(a:focus),
 [part~="skip-link"]:focus {
 	padding: 0.25em .5em;
 	background: canvas;
 	color: canvastext;
-	z-index: 1;
 }
 `;
 

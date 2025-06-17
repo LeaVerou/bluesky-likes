@@ -137,12 +137,13 @@ Displays the avatars of users who liked a post up to a max limit, and the number
 
 ### Slots
 
-| Name          | Description                                                                                       |
-| ------------- | ------------------------------------------------------------------------------------------------- |
-| _(Default)_   | Fallback content to display before component is registered.                                       |
-| `empty`       | Content displayed when there are no likers.                                                       |
-| `skip`        | Content for the skip link. See [Accessibility Notes](#accessibility-notes).                       |
-| `description` | Visually hidden content for screen reader users. See [Accessibility Notes](#accessibility-notes). |
+| Name          | Description                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| _(Default)_   | Fallback content to display before component is registered.                                                              |
+| `empty`       | Content displayed when there are no likers.                                                                              |
+| `skip-link`   | Skip link. See [Accessibility Notes](#accessibility-notes). You don't need to implement event handling or hiding for it. |
+| `skip-text`   | Content for the skip link. See [Accessibility Notes](#accessibility-notes). Ignored when `skip-link` has content.        |
+| `description` | Visually hidden content for screen reader users. See [Accessibility Notes](#accessibility-notes).                        |
 
 ### Styling
 
