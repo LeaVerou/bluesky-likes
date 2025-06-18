@@ -16,7 +16,9 @@ import { styles, templates } from "./ui.js";
  *
  * @slot - Visually hidden content for screen reader users, providing additional context about the likers
  * @slot empty - Content displayed when there are no likers, defaults to a message with a link to the post
- * @slot skip - Content for the skip link, defaults to "Skip to end"
+ * @slot skip-link - Skip link for keyboard and screen reader users. See Accessibility Notes.
+ * @slot skip-text - Content for the skip link, defaults to "Skip to end". Ignored when skip-link has content.
+ * @slot description - Visually hidden content for screen reader users, defaults to a description of the likers
  *
  * @csspart avatar - The circular element that displays a user's avatar or the "+N" indicator for additional likers
  * @csspart avatar-img - The img element for users with an avatar, with lazy loading enabled
