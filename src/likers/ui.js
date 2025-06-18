@@ -106,6 +106,7 @@ img {
 
 [part~="avatar"] {
 	block-size: var(--bluesky-likers-avatar-size);
+	inline-size: var(--bluesky-likers-avatar-size); /* fallback for Safari which doesn't respect aspect-ratio for some reason */
 	aspect-ratio: 1;
 	object-fit: cover;
 	border-radius: 50%;
